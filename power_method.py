@@ -5,9 +5,6 @@ import numpy as np
 def get_input():
     # Reading order of matrix
     n = int(input('Enter order of matrix: '))
-
-    # Making Numpy array of n x n size and initializing
-    # to zero for storing matrix
     a = np.zeros((n, n))
 
     # Reading matrix
@@ -16,19 +13,13 @@ def get_input():
         for j in range(n):
             a[i][j] = float(input(f'a[{i}][{j}] = '))
 
-    # Making Numpy array n x 1 size and initializing to zero
-    # for storing initial guess vector
     eigen_vector = np.zeros((n))
 
-    # Reading initial guess vector
     print('Enter initial guess vector: ')
     for i in range(n):
         eigen_vector[i] = float(input(f'x[{i}] = '))
 
-    # Reading tolerable error
     tolerable_error = float(input('Enter tolerable error: '))
-
-    # Reading maximum number of steps
     max_iteration = int(input('Enter maximum number of steps: '))
 
     return(a, eigen_vector, tolerable_error, max_iteration)
@@ -51,9 +42,8 @@ def solve(a, eigen_vector=None, max_iteration=10, tolerable_error=0.001):
     if eigen_vector is None:
         eigen_vector = [1] * len(a)
 
-    # Power Method Implementation
     while condition:
-        # Multiplying a and x
+        # Multiplying matrix and eigen_vector
         eigen_vector = np.matmul(a, eigen_vector)
 
         # Finding new Eigen value and Eigen vector
@@ -77,7 +67,6 @@ def solve(a, eigen_vector=None, max_iteration=10, tolerable_error=0.001):
 
 if __name__ == '__main__':
     for i, arg in enumerate(sys.argv):
-        # import pdb; pdb.set_trace()
         if arg == '--m' or arg == 'matrix':
             if sys.argv[i + 1] == 'input':
                 # Getting variables from input and terminal
